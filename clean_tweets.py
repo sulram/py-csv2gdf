@@ -3,7 +3,7 @@ import util
 from optparse import OptionParser
 
 def main():
-    parser = OptionParser(usage="usage: %prog [options] filename",
+    parser = OptionParser(usage="usage: %prog [--input tweets.csv] [--output tweets_clean.txt] [--column tweet]",
                           version="%prog 1.0")
     parser.add_option("-i", "--input",
 	    action="store", # optional because action defaults to "store"
