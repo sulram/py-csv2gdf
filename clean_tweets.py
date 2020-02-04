@@ -1,6 +1,7 @@
 import csv
 import util
 from optparse import OptionParser
+from progress.bar import Bar
 
 def main():
     parser = OptionParser(usage="usage: %prog [--input tweets.csv] [--output tweets_clean.txt] [--column tweet]",
@@ -14,8 +15,22 @@ def main():
     (options, args) = parser.parse_args()
 
     with open(options.output, "w") as my_output_file:
+
         with open(options.input, "r") as my_input_file:
-            [my_output_file.write("".join(util.clean(row[options.column]))+'\n') for row in csv.DictReader(my_input_file)]
+            
+            # one line method
+            #[my_output_file.write("".join(util.clean(row[options.column]))+'\n') for row in csv.DictReader(my_input_file)]
+
+            # with progress bar
+            size = sum(1 for row in csv.DictReader(my_input_file))
+            my_input_file.seek(0)
+            reader = csv.DictReader(my_input_file)
+            bar = Bar('Processing', max=size)
+            for row in reader:
+                my_output_file.write("".join(util.clean(row[options.column]))+'\n')
+                bar.next()
+
+            bar.finish()
         my_output_file.close()
 
 if __name__ == '__main__':

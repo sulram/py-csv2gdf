@@ -24,3 +24,4 @@ python clean_tweets.py [--input tweets.csv] [--output tweets_clean.txt] [--colum
 * Python 3.5
 * [demoji](https://github.com/bsolomon1124/demoji)
 * [gdf-formatter](https://github.com/GabrielTrettel/GDF_Formatter)
+* [progress](https://pypi.org/project/progress/)
