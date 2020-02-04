@@ -16,11 +16,18 @@ def remove_links(string):
     return re.sub(r'\b(?:(?:https?|ftp)://)?\w[\w-]*(?:\.[\w-]+)+\S*', '', string)
 
 def remove_symbols(string):
-    return re.sub(r"[,.;:?!&$*'\"“()\[\]…•]+", ' ', string)
+    return re.sub(r"[,.;:?!&$*'\"“()\[\]…•%¨°]+", ' ', string)
 
 def f_stop_words(item):
 	return item.lower() not in stop_words
 
+def clean(string):
+    
+    string = remove_emojis(string)
+    string = remove_links(string)
+    string = remove_symbols(string)
+    
+    return re.sub(' +', ' ', string.lower()) # lowercase and remove extra spaces
 
 def tokenize(phrase):
 
